@@ -28,7 +28,7 @@ $tipo = $_POST['tipo'];
  			$queryTwo->bindParam(':i', $informacoes);
  			$queryTwo->bindParam(':z', $tipo);
  			$queryTwo->execute();
-		header('location: index.php');
+		header('location: ../Views/index.php');
 	else:
 		echo "Cpf/Cnpj já existe!";
 	endif;

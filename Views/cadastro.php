@@ -5,22 +5,32 @@
     <meta charset="UTF-8">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-
-
 <link rel="stylesheet" href="../Estilos/style.css">
-<?php
-    $estado = ['Acre','Alagoas','Amapá','Amazonas','Bahia','Ceará','Distrito Federal','Espírito Santo','Goiás','Maranhão','Mato Grosso','Mato Grosso do Sul','Minas Gerais','Pará','Paraíba','Paraná','Pernambuco','Piauí','Rio de Janeiro','Rio Grande do Norte','Rio Grande do Sul','Rondônia','Roraima','Santa Catarina','São Paulo','Sergipe','Tocantins'];
-?>
+
+
 </head>
-<body>
-    <div class="container">
-    <div class="row">
-        <div class="col-sm-9 col-md-12 col-lg-5 my-2  mx-auto" >
-            <div class="card card-signin  " style="box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);">
+
+
+<!-- Botão para acionar modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+Abrir modal de demonstração
+</button>
+
+        <!-- Modal -->
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+              
+            <div class="modal-body">
+        <?php  $estado = ['Acre','Alagoas','Amapá','Amazonas','Bahia','Ceará','Distrito Federal','Espírito Santo','Goiás','Maranhão','Mato Grosso','Mato Grosso do Sul','Minas Gerais','Pará','Paraíba','Paraná','Pernambuco','Piauí','Rio de Janeiro','Rio Grande do Norte','Rio Grande do Sul','Rondônia','Roraima','Santa Catarina','São Paulo','Sergipe','Tocantins'];
+        ?>
                 <div class="card-body">
                     <img id="ifpe"  src="../screen-11.png">
-                        <form method="post" action="../Controllers/addUser.php" class="" enctype="multipart/form-data">
+                        <form method="post" action="../Controllers/addUser.php" class="form-adc" enctype="multipart/form-data">
                             <div class="form-label-group">
                                 <input id="nome" class="form-control " type="text" name="nome" placeholder="Nome" value="" required>
                                 <label for="nome" class="text-center">Nome Completo * </label>
@@ -75,18 +85,21 @@
                             </button>                   
                         </div>
                     </form>
-                           <a href="index.php" style="text-decoration: none;color: white;">
+                    <a href="index.php" style="text-decoration: none;color: white;">
                         <div class="custom-control custom-checkbox mb-3">
                                 <button class="btn btn-lg btn-danger btn-block text-uppercase" id="enviar" type="submit">
                                     Index
                                 </button>                   
                         </div>
-                           </a>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    </div>        
 </div>
+   
+
+
 <script>
             var code  ="{{Request::query('cpf1')}}"; //codigo que é passado do back-end como segunda camada de proteção
             $("#cpf_cnpj").keydown(function(){
@@ -127,9 +140,34 @@
                     $("#telefone").mask("(00) 0000-00009")
                 }
                })
+// ==================================================================================================
+                $('.form-adc').submit( function(event){
+                    event.preventDefault();
+                    var that = $(this);
+                    var dados = $( this ).serialize();
+                    url = $(this).attr('href');
+                    console.log(url);   
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: dados
+                    })
+                    .done(function() {
+                        that.parent().parent().parent().parent().parent().remove();
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                    
+                  });
+
                       
            });
-// ==================================================================================================
+
+
 
             if(code == 'code1'){
             mudar_falha();      //chama a função se por acaso o codigo retornado do back for code1

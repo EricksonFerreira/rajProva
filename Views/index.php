@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-<link rel="stylesheet" href="../Estilos/a.css">
+<link rel="stylesheet" href="../Estilos/style.css">
 <div class="container"><br>
 <a href="cadastro.php" class="btn btn-success float-left">Adicionar</a>
 	<div class="row">
@@ -35,16 +35,18 @@
 				</figcaption>
 				<div class="bottom-wrap">
 					<a href="editar.php?id=<?=$value['cpf_cnpj']?>" class="btn btn-sm btn-warning float-left">Editar</a>	
-					<a href="../Controllers/rmUser.php?id=<?=$value['cpf_cnpj']?>" class="btn btn-sm btn-danger float-left" style="margin-left: 1em" id="deletar">Deletar</a>	
+					<a href="../Controllers/rmUser.php?id=<?=$value['cpf_cnpj']?>" class="btn btn-sm btn-danger float-left deletar" style="margin-left: 1em" onclick="return confirm('Tem certeza que deseja deletar este registro?')" >Deletar</a>	
 				</div> <!-- bottom-wrap.// -->
 			</figure>
-		<br><br>
+			<br><br>
 		</div> <!-- col // -->
 	<?php endforeach ?>
 	</div> <!-- row.// -->
 </div> 
 <!--container.//-->
 <script>
+
+
 
             $(document).ready(function () { 
 	          $('.rating-wrap').show("slow")
@@ -53,12 +55,25 @@
 	           		$('.bottom-wrap').show("fast");
 	          });
 
-	          // $('.col-md-4').hover( function(event){
-	          //  		$('.rating-wrap').show("slow");
-	          // });      
-	          $('#deletar').click( function(){
+	          $('.deletar').click( function(event){
 	          	event.preventDefault();
-	          	alert('oi')
+	          	var that = $(this);
+	          	url = $(this).attr('href');
+	          	console.log(url);	
+	          	$.ajax({
+	          		url: url,
+	          		type: 'GET',
+	          	})
+	          	.done(function() {
+	          		that.parent().parent().parent().remove();
+	          	})
+	          	.fail(function() {
+	          		console.log("error");
+	          	})
+	          	.always(function() {
+	          		console.log("complete");
+	          	});
+	          	
 	          });      
            });
         </script>
