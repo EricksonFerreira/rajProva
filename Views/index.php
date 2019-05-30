@@ -1,79 +1,31 @@
-<?php require_once('../Controllers/conexao.php');?>
+<html>    
+    <head>
+    <?php require_once('../Controllers/conexao.php');?>
+        <title>Index</title>
+        <meta charset="UTF-8">
+        <!-- CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<link rel="stylesheet" href="../Estilos/style.css">
-<div class="container"><br>
-<a href="cadastro.php" class="btn btn-success float-left">Adicionar</a>
-	<div class="row">
-<?php Include('navbar.php') ?>
-		<?php 	$sql = 'SELECT * FROM usuario';
-				$queryOne = $conn->prepare($sql);
-				$queryOne->execute(); 
-				$stmt = $queryOne->fetchAll();?>
-		<?php 	foreach ($stmt as $value):?>
-		<div class="col-md-4">
-			<figure class="card card-product">
-				<div class="img-wrap">
-				<?php if ($value['tipo'] == 'fisico'): ?>
-					<img src="../fisica.png">
-				<?php else: ?>
-					<img src="../screen-11.png">
-				<?php endif ?>
-				</div>
-				<figcaption class="info-wrap">
-						<h4 class="title"><?= $value['nome'];?></h4>
-						<p class="desc"><?= $value['informacoes'];?></p>
-						<div class="rating-wrap">
-							<div class="label-rating"><strong>Cidade:</strong> <?= $value['cidade'];?></div><br>	
-							<div class="label-rating"><strong>Estado:</strong> <?= $value['estado'];?></div><br>	
-							<div class="label-rating"><strong>Email:</strong> <?= $value['email'];?></div><br>	
-							<div class="label-rating"><strong>Telefone:</strong> <?= $value['telefone'];?></div><br>	
-							<div class="label-rating"><strong>CPF/CNPJ:</strong> <?= $value['cpf_cnpj'];?></div>
-						</div> <!-- rating-wrap.// -->
-				</figcaption>
-				<div class="bottom-wrap">
-					<a href="editar.php?id=<?=$value['cpf_cnpj']?>" class="btn btn-sm btn-warning float-left">Editar</a>	
-					<a href="../Controllers/rmUser.php?id=<?=$value['cpf_cnpj']?>" class="btn btn-sm btn-danger float-left deletar" style="margin-left: 1em" onclick="return confirm('Tem certeza que deseja deletar este registro?')" >Deletar</a>	
-				</div> <!-- bottom-wrap.// -->
-			</figure>
-			<br><br>
-		</div> <!-- col // -->
-	<?php endforeach ?>
-	</div> <!-- row.// -->
-</div> 
-<!--container.//-->
-<script>
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 
-
-
-            $(document).ready(function () { 
-	          $('.rating-wrap').show("slow")
-	          $('.col-md-4').hover(function(){
-	          	event.preventDefault();
-	           		$('.bottom-wrap').show("fast");
-	          });
-
-	          $('.deletar').click( function(event){
-	          	event.preventDefault();
-	          	var that = $(this);
-	          	url = $(this).attr('href');
-	          	console.log(url);	
-	          	$.ajax({
-	          		url: url,
-	          		type: 'GET',
-	          	})
-	          	.done(function() {
-	          		that.parent().parent().parent().remove();
-	          	})
-	          	.fail(function() {
-	          		console.log("error");
-	          	})
-	          	.always(function() {
-	          		console.log("complete");
-	          	});
-	          	
-	          });      
-           });
-        </script>
+        <!-- LINKS -->
+        <link rel="stylesheet" href="../Estilos/style.css">
+        <script type="text/javascript" src="../Estilos/style.js"></script>    
+    </head>
+    <body>
+        <div class="container"><br>
+        <!-- Botão para acionar modal -->
+        <button type="button" class="btn btn-Success" data-toggle="modal" data-target="#modalExemplo" style="height: 4em;width: 6em;margin-left: -7em;margin-top: 1em;display: inline-flex;">
+                Adicionar
+        </button>
+            <div class="row">
+        <?php Include('modal.php') ?>
+        <?php Include('card.php') ?>
+            </div> <!-- row.// -->
+        </div> <!--container.//-->
+    </body>
+</html>

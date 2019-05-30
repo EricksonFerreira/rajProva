@@ -29,7 +29,7 @@ $cpf_cnpj = $_GET['id'];
         <div class="col-sm-9 col-md-12 col-lg-5 my-2  mx-auto" >
             <div class="card card-signin  " style="box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);">
                 <div class="card-body">
-                    <img id="ifpe"  src="../screen-11.png">
+                    <center><h2 style="color: #636363">EDITAR</h2></center><br>  
                         <form method="post" action="../Controllers/edtUser.php" class="" enctype="multipart/form-data">
                             <div class="form-label-group">
                                 <input id="nome" class="form-control " type="text" name="nome" placeholder="Nome" value="<?=$stmt['nome']?>" required>
@@ -100,7 +100,7 @@ $cpf_cnpj = $_GET['id'];
                         <div class="custom-control custom-checkbox mb-3">
                            <a href="index.php" style="text-decoration: none;color: white;">
                                 <button class="btn btn-lg btn-danger btn-block text-uppercase" id="enviar" type="submit">
-                                    Index
+                                    VOLTAR
                                 </button>                   
                            </a>
                         </div>

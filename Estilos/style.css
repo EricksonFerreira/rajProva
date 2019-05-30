@@ -9,8 +9,7 @@
 }
 
 #ifpe {
-  max-width: 300px;
-  max-width: 300px;
+  max-width: 150px;
   width: auto;
   height: auto;
   padding-left: 60px;
@@ -199,4 +198,7 @@ body {
 }
 .card-product .price-old {
     color: #999;
+}
+.col-md-3:hover .bottom-wrap{
+display: block;
 }
