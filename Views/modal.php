@@ -1,6 +1,4 @@
-
-
-        <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -18,7 +16,7 @@
                             <div class="row">
                                 <div class="form-label-group col-md-6">
                                     <input id="cpf_cnpj" class="form-control user_cpf" type="text" name="cpf_cnpj" value="" required placeholder="CPF/CNPJ" id="cpf_cnpj">
-                                    <label id="cpf" class="text-center" for="cpf_cnpj" >CPF/CNPJ *</label>
+                                    <label id="cpf" class="text-center" for="cpf_cnpj">CPF/CNPJ *</label>
                                 </div>
                                 <div class="form-label-group col-md-6">
                                     <input class="form-control" type="text" name="telefone" id="telefone" placeholder="Telefone" value="" maxlength="15" >
