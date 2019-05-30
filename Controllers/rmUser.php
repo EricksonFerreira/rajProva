@@ -2,6 +2,7 @@
 require_once('conexao.php');
 $cpf_cnpj = $_GET['id'];
 
+//Deleta o usuario do banco
 $sql = 'DELETE FROM usuario WHERE cpf_cnpj=?';
 $queryOne = $conn->prepare($sql);
 $queryOne->bindParam(1, $cpf_cnpj);
