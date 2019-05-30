@@ -1,5 +1,6 @@
 <html>    
     <head>
+        <link rel="icon" type="image/ico" href="../raj.png"/>
     <?php require_once('../Controllers/conexao.php');?>
         <title>Index</title>
         <meta charset="UTF-8">
